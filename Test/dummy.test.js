@@ -12,18 +12,6 @@ test('testing', () => {
   expect(data()).toEqual({name : "udit"})
 });
 
-test('testing callback function', done=> {
-   const testing = (data) =>{
-    try {
-      expect(data).toBe("test")
-      done()
-    } catch (error) {
-      done(error)
-    }
-   }
-   testfunction(testing)
-});
-
 test('Promise testing', async () => {
   return await testPromise().then((data)=>{
     expect(data).toBe("Success")
@@ -38,3 +26,16 @@ test('Acync testing', async () => {
 afterEach(()=>{
   console.log(after())
 })
+
+test('testing callback function', done=> {
+   const testing = (data) =>{
+    try {
+      expect(data).toBe("test")
+      done()
+    } catch (error) {
+      done(error)
+    }
+   }
+   testfunction(testing)
+});
+

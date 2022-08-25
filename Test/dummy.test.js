@@ -1,10 +1,40 @@
-function sum(a, b) {
-    return a + b;
-  }
-  function sub(a, b) {
-    return b - a;
-  }
+const {data} = require("./testing");
+const {testfunction} = require("./testing");
+const {testPromise} = require("./testing");
+const {testAsync} = require("./testing");
+const {before} = require("./testing");
+const {after} = require("./testing");
+
+beforeEach(()=>{
+  console.log(before())
+})
 test('testing', () => {
-  expect(sum(5, 9)).toBe(14);
-  expect(sub(5, 9)).toBe(4);
+  expect(data()).toEqual({name : "udit"})
 });
+
+test('testing callback function', done=> {
+   const testing = (data) =>{
+    try {
+      expect(data).toBe("test")
+      done()
+    } catch (error) {
+      done(error)
+    }
+   }
+   testfunction(testing)
+});
+
+test('Promise testing', async () => {
+  return await testPromise().then((data)=>{
+    expect(data).toBe("Success")
+  })
+});
+
+test('Acync testing', async () => {
+  const data = await testAsync();
+  expect(data).toBe("Success")
+});
+
+afterEach(()=>{
+  console.log(after())
+})
